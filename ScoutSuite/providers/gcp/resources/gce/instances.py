@@ -91,8 +91,10 @@ class Instances(GCPCompositeResources):
     def _shielded_vm_enabled(self, raw_instance):
         vtpm = raw_instance['shieldedInstanceConfig'].get('enableVtpm', False)
         integrity_monitoring = raw_instance['shieldedInstanceConfig'].get('enableIntegrityMonitoring', False)
-        secure_boot = raw_instance['shieldedInstanceConfig'].get('enableSecureBoot', False)
-        return vtpm and integrity_monitoring and secure_boot
+        # Secure boot is not enabled by default and not recommended in all scenarios so we should ship this check
+        # https://cloud.google.com/compute/shielded-vm/docs/shielded-vm
+        # secure_boot = raw_instance['shieldedInstanceConfig'].get('enableSecureBoot', False)
+        return vtpm and integrity_monitoring
 
     def _public_ip_adresses(self, raw_instance):
         for network in raw_instance['networkInterfaces']:
