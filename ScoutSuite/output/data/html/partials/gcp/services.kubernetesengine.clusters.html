@@ -18,7 +18,7 @@
         <div class="list-group-item-text item-margin">Dashboard: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.dashboard_status">{{dashboard_status}}</span></div>
         <div class="list-group-item-text item-margin">Legacy Authorization (ABAC): <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.legacy_abac_enabled">{{convert_bool_to_enabled legacy_abac_enabled}}</span></div>
         <div class="list-group-item-text item-margin">Pod Security Policy: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.pod_security_policy_enabled">{{convert_bool_to_enabled pod_security_policy_enabled}}</span></div>
-        <div class="list-group-item-text item-margin">Network Policy: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.network_policy_disabled">{{convert_bool_to_enabled network_policy_enabled}}</span></div>
+        <div class="list-group-item-text item-margin">Network Policy: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.network_policy_disabled">{{network_policy_enabled}}</span></div>
         <div class="list-group-item-text item-margin">Service Account: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.default_service_account_used">{{service_account}}</span></div>
         <div class="list-group-item-text item-margin">Workload Identity: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.workload_identity_enabled">{{convert_bool_to_enabled workload_identity_enabled}}</span></div>
         <div class="list-group-item-text item-margin">Private Google Access: <span id="kubernetesengine.projects.{{@../key}}.clusters.{{@key}}.private_ip_google_access_disabled">{{convert_bool_to_enabled private_ip_google_access_enabled}}</span></div>

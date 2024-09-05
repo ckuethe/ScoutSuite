@@ -1,5 +1,5 @@
 {
-    "description": "Network Policy Disabled",
+    "description": "Network Policies Disabled",
     "rationale": "By default, pods are non-isolated; they accept traffic from any source. Pods become isolated by having a NetworkPolicy that selects them. Once there is any NetworkPolicy in a namespace selecting a particular pod, that pod will reject any connections that are not allowed by any NetworkPolicy.",
     "compliance": [
         {
@@ -15,6 +15,7 @@
     ],
     "references": [
         "https://www.cisecurity.org/benchmark/kubernetes/",
+        "https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy",
         "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_with_network_policy",
         "https://cloud.google.com/kubernetes-engine/docs/concepts/security-overview#network_security",
         "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
@@ -25,8 +26,8 @@
         "and",
         [
             "kubernetesengine.projects.id.clusters.id.network_policy_enabled",
-            "false",
-            ""
+            "equal",
+            "Disabled"
         ]
     ],
     "id_suffix": "network_policy_disabled"
