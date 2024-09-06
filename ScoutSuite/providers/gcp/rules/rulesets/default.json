@@ -65,6 +65,12 @@
                 "level": "warning"
             }
         ],
+        "cloudsql-instance-mutual-ssl-not-required.json": [
+            {
+                "enabled": true,
+                "level": "warning"
+            }
+        ],
         "cloudsql-instance-with-no-backups.json": [
             {
                 "enabled": true,

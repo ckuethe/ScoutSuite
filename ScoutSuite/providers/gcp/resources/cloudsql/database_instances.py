@@ -39,7 +39,8 @@ class DatabaseInstances(GCPCompositeResources):
         instance_dict['database_type'] = raw_instance['databaseVersion'].split('_')[0]
         instance_dict['binary_logging_enabled'] = raw_instance['settings'].get('backupConfiguration', {}).get('enabled')
         instance_dict['pitr_enabled'] = raw_instance['settings'].get('backupConfiguration', {}).get('pointInTimeRecoveryEnabled')
-        instance_dict['ssl_required'] = self._is_ssl_required(raw_instance)
+        instance_dict['ssl_required'] = raw_instance['settings'].get('ipConfiguration', {}).get('requireSsl', False)  # deprecated
+        instance_dict['ssl_mode'] = raw_instance['settings'].get('ipConfiguration', {}).get('sslMode', False)
         instance_dict['authorized_networks'] = raw_instance['settings'].get('ipConfiguration', {}).get('authorizedNetworks', [])
 
         if raw_instance['settings'].get('databaseFlags', None):

@@ -13,7 +13,7 @@
         <div class="list-group-item-text item-margin">Last Backup: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.last_backup_timestamp">{{format_date last_backup_timestamp}}</span></div>
         <div class="list-group-item-text item-margin">Binary Logging: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.binary_logging_enabled">{{convert_bool_to_enabled binary_logging_enabled}}</span></div>
         <div class="list-group-item-text item-margin">Point-in-Time Recovery: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.pitr_enabled">{{convert_bool_to_enabled pitr_enabled}}</span></div>
-        <div class="list-group-item-text item-margin">SSL Required: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.ssl_required">{{convert_bool_to_enabled ssl_required}}</span></div>
+        <div class="list-group-item-text item-margin">SSL/TLS Mode: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.ssl_mode">{{value_or_none ssl_mode}}</span></div>
         <div class="list-group-item-text item-margin">Public IP Address: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.public_ip"><samp>{{value_or_none public_ip}}</samp></span></div>
         <div class="list-group-item-text item-margin">Private IP Address: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.private_ip"><samp>{{value_or_none private_ip}}</samp></span></div>
         <div class="list-group-item-text item-margin">Local Infile Flag is Off: <span id="cloudsql.projects.{{@../key}}.instances.{{@key}}.local_infile_off"><samp>{{value_or_none local_infile_off}}</samp></span></div>
