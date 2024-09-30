@@ -22,6 +22,7 @@ class Clusters(Resources):
         cluster_dict['name'] = raw_cluster['name']
         cluster_dict['location'] = raw_cluster['location']
         cluster_dict['status'] = raw_cluster['status']
+        cluster_dict['mode'] = 'Autopilot' if raw_cluster.get('autopilot', {}).get('enabled', False) else 'Standard'
         cluster_dict['type'] = "Zonal" if raw_cluster['location'].count("-") > 1 else "Regional"
         cluster_dict['alias_ip_enabled'] = raw_cluster.get('ipAllocationPolicy', {}).get('useIpAliases', False)
         cluster_dict['basic_authentication_enabled'] = self._is_basic_authentication_enabled(raw_cluster)
@@ -38,7 +39,7 @@ class Clusters(Resources):
         cluster_dict['master_authorized_networks_enabled'] = raw_cluster.get('masterAuthorizedNetworksConfig', {}).get(
             'enabled', False)
         cluster_dict['monitoring_enabled'] = self._is_monitoring_enabled(raw_cluster)
-        cluster_dict['network_policy_enabled'] = self._network_policies_state(raw_cluster)
+        cluster_dict['network_policy_enabled'] = self._network_policies_state(raw_cluster, cluster_dict['mode'])
         cluster_dict['node_pools'] = NodePools(raw_cluster)
         cluster_dict['scopes'] = self._get_scopes(raw_cluster)
         cluster_dict['service_account'] = raw_cluster.get('nodeConfig', {}).get('serviceAccount', None)
@@ -123,8 +124,10 @@ class Clusters(Resources):
                       raw_cluster['addonsConfig']['kubernetesDashboard'].get('disabled')
         return 'Disabled' if is_disabled else 'Enabled'
 
-    def _network_policies_state(self, raw_cluster):
-        if raw_cluster.get('networkConfig', {}).get('datapathProvider') == 'ADVANCED_DATAPATH':
+    def _network_policies_state(self, raw_cluster, mode):
+        if mode == "Autopilot":
+            return "Enabled (Dataplane V2)"
+        elif raw_cluster.get('networkConfig', {}).get('datapathProvider') == 'ADVANCED_DATAPATH':
             return "Enabled (Dataplane V2)"
         elif raw_cluster.get('networkPolicy', {}).get('enabled', False):
             return "Enabled (Calico)"
